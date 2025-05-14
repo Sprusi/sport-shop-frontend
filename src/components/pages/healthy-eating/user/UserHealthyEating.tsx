@@ -1,36 +1,40 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 
-import { Card, Carousel, Flex, Typography } from 'antd';
+import { Card, Carousel, Empty, Flex, Typography } from 'antd';
 
-import { InterfaceLabels } from '@/constants';
+import { ActionMessages, InterfaceLabels } from '@/constants';
 
 import MealCardExtra from './meal-card/meal-card-extra/MealCardExtra';
 import MealCard from './meal-card/MealCard';
-import { MealPlanResponseDto } from '@/dto';
 import { EatingType } from '@/enums/EatingType';
-import { HealthyEatingServices } from '@/services/HealthyEatingServices';
+import { useUserHealthyEatingStore } from '@/stores/useUserHealthyEatingStore';
 
-const { Title } = Typography;
+const { Title, Text } = Typography;
 
 export const UserHealthyEating = () => {
-  const [data, setData] = useState<MealPlanResponseDto[]>([]);
+  const { data, loading, getData, updateNeeded } = useUserHealthyEatingStore();
   useEffect(() => {
-    HealthyEatingServices.getHealthyEatingForUser(1).then(({ data }) => setData(data));
-  }, []);
+    updateNeeded && getData();
+  }, [updateNeeded]);
+
   return (
     <Flex vertical>
-      <Card title={<Title level={3}>{InterfaceLabels.HEALTHY_EATING_FOR_YOU}</Title>}>
-        <Carousel arrows>
-          {data.map(({ meals: { breakfast, lunch, dinner }, totals }, index) => (
-            <Card key={index} extra={<MealCardExtra total={totals} />} variant="borderless">
-              <Flex vertical={false} justify="space-around" gap="middle" wrap>
-                <MealCard meal={breakfast} type={EatingType.BREAKFAST} />
-                <MealCard meal={lunch} type={EatingType.LUNCH} />
-                <MealCard meal={dinner} type={EatingType.DINNER} />
-              </Flex>
-            </Card>
-          ))}
-        </Carousel>
+      <Card title={<Title level={3}>{InterfaceLabels.HEALTHY_EATING_FOR_YOU}</Title>} loading={loading}>
+        {data.length ? (
+          <Carousel arrows>
+            {data.map(({ meals: { breakfast, lunch, dinner }, totals }, index) => (
+              <Card key={index} extra={<MealCardExtra total={totals} />} variant="borderless">
+                <Flex vertical={false} justify="space-around" gap="middle" wrap>
+                  <MealCard meal={breakfast} type={EatingType.BREAKFAST} />
+                  <MealCard meal={lunch} type={EatingType.LUNCH} />
+                  <MealCard meal={dinner} type={EatingType.DINNER} />
+                </Flex>
+              </Card>
+            ))}
+          </Carousel>
+        ) : (
+          <Empty description={<Text>{ActionMessages.SORRY}</Text>} />
+        )}
       </Card>
     </Flex>
   );

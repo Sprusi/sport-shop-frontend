@@ -15,6 +15,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@ant-design/icons": "5.x",
     "@babel/core": "^7.26.9",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.15",
     "@svgr/webpack": "^8.1.0",
@@ -41,6 +42,7 @@
     "eslint-plugin-react": "^7.31.11",
     "eslint-plugin-react-hooks": "^4.6.0",
     "html-webpack-plugin": "^5.6.3",
+    "menu": "^0.2.5",
     "mini-css-extract-plugin": "^2.9.2",
     "prettier": "^2.8.3",
     "react-refresh": "^0.16.0",
@@ -53,7 +55,8 @@
     "webpack": "^5.98.0",
     "webpack-bundle-analyzer": "^4.10.2",
     "webpack-cli": "^6.0.1",
-    "webpack-dev-server": "^5.2.0"
+    "webpack-dev-server": "^5.2.0",
+    "zustand": "^5.0.4"
   },
   "dependencies": {
     "antd": "^5.25.0",

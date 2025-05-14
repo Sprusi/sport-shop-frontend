@@ -15,3 +15,19 @@ export const HEALTHY_EATING_FATS = 'Жиры';
 export const HEALTHY_EATING_SQUIRRELS = 'Белки';
 export const HEALTHY_EATING_COMPOUND = 'Состав';
 export const HEALTHY_EATING_PRICE = 'Цена';
+
+//AdminHealthyEating
+
+export const ADMIN_HEALTHY_EATING_TITLE = 'Список продуктов';
+
+export const ADMIN_HEALTHY_EATING_TABLE_COLUMNS = {
+  id: 'Действия',
+  title: 'Название',
+  compound: 'Состав',
+  kcal: 'Калории',
+  squirrels: 'Белки',
+  fats: 'Жиры',
+  carbohydrates: 'Углеводы',
+  price: 'Цена',
+  image: 'Изображение',
+};

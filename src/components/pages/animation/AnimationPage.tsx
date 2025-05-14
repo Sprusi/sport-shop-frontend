@@ -7,14 +7,14 @@ import ru_RU from 'antd/es/locale/ru_RU';
 import { ActionMessages, InterfaceLabels } from '@/constants';
 
 import styles from './AnimationPage.module.scss';
-import { theme } from '@/styles/theme';
+import { customTheme } from '@/styles/theme';
 
 const { Title } = Typography;
 
 export const AnimationPage = () => {
   const navigate = useNavigate();
   return (
-    <ConfigProvider locale={ru_RU} theme={theme}>
+    <ConfigProvider locale={ru_RU} theme={customTheme}>
       <div className={styles.videoContainer}>
         <video className={styles.video} autoPlay muted loop playsInline>
           <source
