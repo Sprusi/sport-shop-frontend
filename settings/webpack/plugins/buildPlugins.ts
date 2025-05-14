@@ -1,12 +1,16 @@
 import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin';
 import dotenv from 'dotenv';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
-import webpack, { Configuration } from 'webpack';
+import webpack, { Configuration, container } from 'webpack';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 
 import { BuildOptions } from 'settings/webpack/types';
 
+import { dependencies } from '../../../package.json';
+
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+
+const { ModuleFederationPlugin } = container;
 
 export function buildPlugins(options: BuildOptions): Configuration['plugins'] {
   const { mode, paths, hot, analyzer } = options;
@@ -22,7 +26,29 @@ export function buildPlugins(options: BuildOptions): Configuration['plugins'] {
       favicon: paths.favicon,
       template: paths.html,
     }),
+    new ModuleFederationPlugin({
+      name: 'ShopFrontend',
+      filename: `remoteEntry.js`,
+      exposes: {
+        './ShopFrontend': './src/navigation/index.tsx',
+      },
+      shared: {
+        react: {
+          singleton: true,
+          requiredVersion: dependencies.react,
+        },
+        'react-dom': {
+          singleton: true,
+          requiredVersion: dependencies['react-dom'],
+        },
+        'react-router-dom': {
+          singleton: true,
+          requiredVersion: dependencies['react-router-dom'],
+        },
+      },
+    }),
   ];
+
   new webpack.DefinePlugin(envKeys),
     isProd &&
       plugins.push(
