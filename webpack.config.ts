@@ -24,8 +24,8 @@ export default (env: EnvVariables) => {
       src: path.resolve(__dirname, 'src'),
       public: path.resolve(__dirname, 'public'),
     },
-    hot: env.hot === 'true' ? true : false,
-    analyzer: env.analyzer === 'true' ? true : false,
+    hot: env.hot === 'true',
+    analyzer: env.analyzer === 'true',
   });
   return config;
 };

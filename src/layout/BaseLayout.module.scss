@@ -1,0 +1,10 @@
+.layout {
+  min-height: 100vh;
+
+  &Content {
+    padding: 24px 50px;
+    &Card {
+      height: 100%;
+    }
+  }
+}
