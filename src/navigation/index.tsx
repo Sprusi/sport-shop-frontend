@@ -10,14 +10,14 @@ import { BaseLayout } from '@/layout/BaseLayout';
 const Navigation = () => {
   return (
     <Routes>
-      <Route path="/shop">
+      <Route path="/">
         <Route index element={<AnimationPage />} />
         <Route element={<BaseLayout />}>
           <Route path="healthy-eating" element={<UserHealthyEating />} />
           <Route path="admin-healthy-eating" element={<AdminHealthyEating />} />
         </Route>
       </Route>
-      <Route path="*" element={<Navigate replace to="/shop" />} />
+      <Route path="*" element={<Navigate replace to="/" />} />
     </Routes>
   );
 };
