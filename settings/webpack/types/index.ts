@@ -7,12 +7,11 @@ export interface BuildPaths {
   public: string;
 }
 
-export type BuildMode = "development" | "production";
+export type BuildMode = 'development' | 'production';
 
 export interface BuildOptions {
   port: number;
   paths: BuildPaths;
   mode: BuildMode;
-  hot?: boolean;
   analyzer?: boolean;
 }

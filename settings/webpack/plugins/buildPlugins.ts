@@ -13,19 +13,22 @@ import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 const { ModuleFederationPlugin } = container;
 
 export function buildPlugins(options: BuildOptions): Configuration['plugins'] {
-  const { mode, paths, hot, analyzer } = options;
+  const { mode, paths, analyzer } = options;
   const isProd = mode === 'production';
   const isDev = mode === 'development';
+
   const env = dotenv.config().parsed || {};
   const envKeys = Object.keys(env).reduce((prev, next) => {
     prev[`process.env.${next}`] = JSON.stringify(env[next]);
     return prev;
   }, {} as Record<string, string>);
+
   const plugins: Configuration['plugins'] = [
     new HtmlWebpackPlugin({
       favicon: paths.favicon,
       template: paths.html,
     }),
+    new webpack.DefinePlugin(envKeys),
     new ModuleFederationPlugin({
       name: 'ShopFrontend',
       filename: `remoteEntry.js`,
@@ -49,18 +52,14 @@ export function buildPlugins(options: BuildOptions): Configuration['plugins'] {
     }),
   ];
 
-  new webpack.DefinePlugin(envKeys),
-    isProd &&
-      plugins.push(
-        new MiniCssExtractPlugin({
-          filename: 'css/[name].css',
-          chunkFilename: 'css/[id].[contenthash].css',
-          ignoreOrder: true,
-        })
-      );
-
-  if (isDev) {
-    hot && plugins.push(new ReactRefreshWebpackPlugin());
+  if (isProd) {
+    plugins.push(
+      new MiniCssExtractPlugin({
+        filename: 'css/[name].css',
+        chunkFilename: 'css/[id].[contenthash].css',
+        ignoreOrder: true,
+      })
+    );
   }
 
   if (analyzer) {
