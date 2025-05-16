@@ -7,7 +7,19 @@ const getHealthyEating = (): Promise<AxiosResponse<HealthyEatingTable[]>> => {
   return instance.get(`/healthyEating`);
 };
 
-const deleteHealthyEating = (id: number): Promise<AxiosResponse<HealthyEatingTable[]>> => {
+const getHealthyEatingById = (id: number): Promise<AxiosResponse<HealthyEatingTable>> => {
+  return instance.get(`/healthyEating/${id}`);
+};
+
+const patchHealthyEatingById = (id: number, data: FormData): Promise<AxiosResponse<HealthyEatingTable[]>> => {
+  return instance.patch(`/healthyEating/${id}`, data);
+};
+
+const createHealthyEating = (data: FormData): Promise<AxiosResponse> => {
+  return instance.post(`/healthyEating`, data);
+};
+
+const deleteHealthyEating = (id: number): Promise<AxiosResponse> => {
   return instance.delete(`/healthyEating/${id}`);
 };
 
@@ -19,4 +31,7 @@ export const HealthyEatingServices = {
   getHealthyEating,
   getHealthyEatingForUser,
   deleteHealthyEating,
+  getHealthyEatingById,
+  createHealthyEating,
+  patchHealthyEatingById,
 };

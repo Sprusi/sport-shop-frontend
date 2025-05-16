@@ -20,3 +20,6 @@ export const DELETE = 'Удалить';
 export const DELETE_MESSAGE = 'Вы действительно хотите удалить запись?';
 export const ID_NOT_FOUND = 'Id не найден';
 export const CREATE = 'Создать запись';
+export const UPLOAD_BUTTON = 'Нажмите для загрузки изображения';
+export const EDIT = 'Редактировать';
+export const CREATE_USER = 'Создать пользователя';

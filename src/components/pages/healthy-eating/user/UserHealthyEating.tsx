@@ -7,7 +7,7 @@ import { ActionMessages, InterfaceLabels } from '@/constants';
 import MealCardExtra from './meal-card/meal-card-extra/MealCardExtra';
 import MealCard from './meal-card/MealCard';
 import { EatingType } from '@/enums/EatingType';
-import { useUserHealthyEatingStore } from '@/stores/useUserHealthyEatingStore';
+import { useUserHealthyEatingStore } from '@/stores/user-healthy-eating/useUserHealthyEatingStore';
 
 const { Title, Text } = Typography;
 

@@ -12,12 +12,14 @@ type Store = {
   getData: () => void;
   deleteItem: (id: number) => void;
   updateNeeded: boolean;
+  setUpdateNeeded: (b: boolean) => void;
 };
 
 export const useAdminHealthyEatingStore = create<Store>()((set) => ({
   data: [],
   loading: false,
   updateNeeded: true,
+  setUpdateNeeded: (updateNeeded: boolean) => set(() => ({ updateNeeded })),
   getData: () => {
     set(() => ({ loading: true }));
     HealthyEatingServices.getHealthyEating()

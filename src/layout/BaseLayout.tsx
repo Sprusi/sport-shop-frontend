@@ -21,7 +21,7 @@ dayjs.locale('ru');
 
 export const BaseLayout: FC = () => {
   const currentLocation = useLocation();
-  const clearPathName = currentLocation.pathname.replace('/shop/', '');
+  const clearPathName = currentLocation.pathname.replace('/', '');
   const navigate = useNavigate();
   const { menuKey, setMenuKey } = useMenuKeyStore();
   const handleMenuKeyChange = useCallback(({ key }: MenuInfo) => {
