@@ -16,9 +16,11 @@ export const instance = axios.create({ baseURL: getBaseUrl() });
 
 instance.interceptors.request.use((config) => {
   const item = localStorage.getItem(TOKEN_KEY);
-  const token = item ? JSON.parse(item) : null;
-  if (token && config.headers) {
-    config.headers['Authorization'] = `Bearer ${token}`;
+  const {
+    token: { accessToken },
+  } = item ? JSON.parse(item) : null;
+  if (accessToken && config.headers) {
+    config.headers['Authorization'] = `Bearer ${accessToken}`;
   }
   return config;
 });

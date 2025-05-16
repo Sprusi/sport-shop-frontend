@@ -20,6 +20,10 @@ export const HEALTHY_EATING_PRICE = 'Цена';
 
 export const ADMIN_HEALTHY_EATING_TITLE = 'Список продуктов';
 
+export const ADMIN_HEALTHY_KCAL_SHORT = 'кКал';
+export const ADMIN_HEALTHY_RUB = 'руб';
+export const ADMIN_HEALTHY_GRAM_SHORT = 'г';
+
 export const ADMIN_HEALTHY_EATING_TABLE_COLUMNS = {
   id: 'Действия',
   title: 'Название',

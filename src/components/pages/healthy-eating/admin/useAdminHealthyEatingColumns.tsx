@@ -69,7 +69,11 @@ export const useAdminHealthyEatingColumns = (): ColumnsType<HealthyEatingTable> 
         key: 'image',
         dataIndex: 'image',
         title: InterfaceLabels.ADMIN_HEALTHY_EATING_TABLE_COLUMNS.image,
-        render: (value) => <Link href={value}>{value}</Link>,
+        render: (value) => (
+          <Link href={value} target="_blank">
+            {value}
+          </Link>
+        ),
       },
     ],
     []
