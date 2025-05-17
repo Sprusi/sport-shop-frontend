@@ -13,5 +13,8 @@ export const customTheme: ThemeConfig = {
     Layout: {
       siderBg: '#141414',
     },
+    Menu: {
+      darkItemBg: '#141414',
+    },
   },
 };

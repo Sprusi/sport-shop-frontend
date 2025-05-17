@@ -1,5 +1,5 @@
 .layout {
-  min-height: 100vh;
+  min-height: calc(100vh - 64px);
 
   &Content {
     padding: 24px 50px;

@@ -22,7 +22,6 @@ export function buildPlugins(options: BuildOptions): Configuration['plugins'] {
     prev[`process.env.${next}`] = JSON.stringify(env[next]);
     return prev;
   }, {} as Record<string, string>);
-
   const plugins: Configuration['plugins'] = [
     new HtmlWebpackPlugin({
       favicon: paths.favicon,

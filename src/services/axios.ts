@@ -8,8 +8,7 @@ const PREFIX = window.location.origin;
 const TOKEN_KEY = `${PREFIX}_tokenUL`;
 
 export function getBaseUrl(): string {
-  // return process.env.REACT_APP_BASE_URL || 'http://localhost:5000';
-  return 'http://localhost:5000';
+  return process.env.REACT_APP_BASE_URL || 'http://localhost:5000';
 }
 
 export const instance = axios.create({ baseURL: getBaseUrl() });
