@@ -7,6 +7,7 @@ import { InterfaceLabels } from '@/constants';
 
 import { Actions } from './AdminHealthyEatingRender/Actions';
 import { HealthyEatingTable } from '@/dto';
+import { EatingType } from '@/enums/EatingType';
 
 const { Link } = Typography;
 
@@ -64,6 +65,13 @@ export const useAdminHealthyEatingColumns = (): ColumnsType<HealthyEatingTable> 
         align: 'center',
         title: InterfaceLabels.ADMIN_HEALTHY_EATING_TABLE_COLUMNS.price,
         sorter: (a, b) => a.price - b.price,
+      },
+      {
+        key: 'eatingType',
+        dataIndex: 'eatingType',
+        align: 'center',
+        title: InterfaceLabels.ADMIN_HEALTHY_EATING_TABLE_COLUMNS.eatingType,
+        render: (value: keyof typeof EatingType) => EatingType[value],
       },
       {
         key: 'image',

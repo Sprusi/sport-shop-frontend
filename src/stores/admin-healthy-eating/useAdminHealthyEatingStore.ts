@@ -23,10 +23,20 @@ export const useAdminHealthyEatingStore = create<Store>()((set) => ({
   getData: () => {
     set(() => ({ loading: true }));
     HealthyEatingServices.getHealthyEating()
-      .then(({ data }) => set(() => ({ data, updateNeeded: false })))
+      .then(({ data }) => {
+        const mappedData = data.map((el) => ({
+          ...el,
+          carbohydrates: el.nutrients.carbohydrates,
+          fats: el.nutrients.fats,
+          squirrels: el.nutrients.squirrels,
+          kcal: el.calories,
+        }));
+        set(() => ({ data: mappedData, updateNeeded: false }));
+      })
       .catch(({ message }) => MessageService.warn(message))
       .finally(() => set(() => ({ loading: false })));
   },
+
   deleteItem: (id: number) => {
     if (!id) return MessageService.warn(ActionMessages.ID_NOT_FOUND);
     set(() => ({ loading: true }));

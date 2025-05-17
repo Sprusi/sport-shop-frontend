@@ -1,4 +1,6 @@
-export interface HealthyEatingTable {
+import { HealthyEating } from './HealthyEating';
+
+export interface HealthyEatingTable extends HealthyEating {
   id: number;
   title: string;
   compound: string;
@@ -8,4 +10,5 @@ export interface HealthyEatingTable {
   carbohydrates: number;
   price: number;
   image: string;
+  calories: number;
 }

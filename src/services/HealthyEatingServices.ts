@@ -1,9 +1,9 @@
 import { AxiosResponse } from 'axios';
 
 import instance from './axios';
-import { HealthyEatingTable, MealPlanResponseDto } from '@/dto';
+import { HealthyEating, HealthyEatingTable, MealPlanResponseDto } from '@/dto';
 
-const getHealthyEating = (): Promise<AxiosResponse<HealthyEatingTable[]>> => {
+const getHealthyEating = (): Promise<AxiosResponse<HealthyEating[]>> => {
   return instance.get(`/healthyEating`);
 };
 

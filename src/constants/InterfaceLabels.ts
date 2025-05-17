@@ -34,4 +34,5 @@ export const ADMIN_HEALTHY_EATING_TABLE_COLUMNS = {
   carbohydrates: 'Углеводы',
   price: 'Цена',
   image: 'Изображение',
+  eatingType: 'Время приема',
 };

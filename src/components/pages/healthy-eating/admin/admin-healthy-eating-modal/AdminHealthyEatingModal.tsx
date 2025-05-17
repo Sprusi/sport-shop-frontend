@@ -1,12 +1,13 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 
 import { UploadOutlined } from '@ant-design/icons';
-import { Button, Form, Input, InputNumber, Modal, Space, Upload, UploadProps } from 'antd';
+import { Button, Form, Input, InputNumber, Modal, Select, Space, Upload, UploadProps } from 'antd';
 import { useForm } from 'antd/es/form/Form';
 
 import { ActionMessages, InterfaceLabels } from '@/constants';
 
 import { HealthyEatingTable } from '@/dto';
+import { EatingType } from '@/enums/EatingType';
 import { MessageService } from '@/services/MessageService';
 import { useAdminHealthyEatingModalStore } from '@/stores/admin-healthy-eating/useAdminHealthyEatingModalStore';
 import { useAdminHealthyEatingStore } from '@/stores/admin-healthy-eating/useAdminHealthyEatingStore';
@@ -26,7 +27,8 @@ export const AdminHealthyEatingModal = () => {
   }, [id]);
   useEffect(() => {
     if (!id || !data) return;
-    form.setFieldsValue(data);
+    const clearData = { ...data, kcal: data.calories };
+    form.setFieldsValue(clearData);
   }, [data]);
   const title = useMemo(() => (id ? ActionMessages.EDIT : ActionMessages.CREATE_USER), [id]);
 
@@ -43,9 +45,15 @@ export const AdminHealthyEatingModal = () => {
         .then((values) => {
           const formData = new FormData();
           console.log('values', values);
-          Object.entries(values).map(([key, value]) =>
-            key === 'image' ? formData.append(key, blob as Blob) : formData.append(key, value)
-          );
+          Object.entries(values).map(([key, value]) => {
+            if (key === 'nutrients') {
+              const { carbohydrates, fats, squirrels } = value;
+              formData.append('carbohydrates', carbohydrates);
+              formData.append('fats', fats);
+              formData.append('squirrels', squirrels);
+            }
+            key === 'image' ? formData.append(key, blob as Blob) : formData.append(key, value);
+          });
           onOk(formData);
           form.resetFields();
           setId(undefined);
@@ -64,33 +72,64 @@ export const AdminHealthyEatingModal = () => {
     onRemove: () => setBlob(undefined),
   };
 
+  const eatingTypeOptions = useMemo(() => Object.entries(EatingType).map(([value, label]) => ({ value, label })), []);
+
   return (
     <Modal open={open} onCancel={handleCancel} onOk={handleOk} centered title={title}>
       <Form form={form} layout="vertical">
-        <Item name="title" label={InterfaceLabels.ADMIN_HEALTHY_EATING_TABLE_COLUMNS.title}>
+        <Item name="title" label={InterfaceLabels.ADMIN_HEALTHY_EATING_TABLE_COLUMNS.title} rules={[{ required: !id }]}>
           <Input />
         </Item>
-        <Item name="compound" label={InterfaceLabels.ADMIN_HEALTHY_EATING_TABLE_COLUMNS.compound}>
+        <Item
+          name="compound"
+          label={InterfaceLabels.ADMIN_HEALTHY_EATING_TABLE_COLUMNS.compound}
+          rules={[{ required: !id }]}
+        >
           <TextArea />
         </Item>
         <Space>
-          <Item name="kcal" label={InterfaceLabels.ADMIN_HEALTHY_EATING_TABLE_COLUMNS.kcal}>
+          <Item name="kcal" label={InterfaceLabels.ADMIN_HEALTHY_EATING_TABLE_COLUMNS.kcal} rules={[{ required: !id }]}>
             <InputNumber addonAfter={InterfaceLabels.ADMIN_HEALTHY_KCAL_SHORT} />
           </Item>
-          <Item name="squirrels" label={InterfaceLabels.ADMIN_HEALTHY_EATING_TABLE_COLUMNS.squirrels}>
+          <Item
+            name={['nutrients', 'squirrels']}
+            label={InterfaceLabels.ADMIN_HEALTHY_EATING_TABLE_COLUMNS.squirrels}
+            rules={[{ required: !id }]}
+          >
             <InputNumber addonAfter={InterfaceLabels.ADMIN_HEALTHY_GRAM_SHORT} />
           </Item>
-          <Item name="fats" label={InterfaceLabels.ADMIN_HEALTHY_EATING_TABLE_COLUMNS.fats}>
+          <Item
+            name={['nutrients', 'fats']}
+            label={InterfaceLabels.ADMIN_HEALTHY_EATING_TABLE_COLUMNS.fats}
+            rules={[{ required: !id }]}
+          >
             <InputNumber addonAfter={InterfaceLabels.ADMIN_HEALTHY_GRAM_SHORT} />
           </Item>
-          <Item name="carbohydrates" label={InterfaceLabels.ADMIN_HEALTHY_EATING_TABLE_COLUMNS.carbohydrates}>
+          <Item
+            name={['nutrients', 'carbohydrates']}
+            label={InterfaceLabels.ADMIN_HEALTHY_EATING_TABLE_COLUMNS.carbohydrates}
+            rules={[{ required: !id }]}
+          >
             <InputNumber addonAfter={InterfaceLabels.ADMIN_HEALTHY_GRAM_SHORT} />
           </Item>
         </Space>
-        <Item name="price" label={InterfaceLabels.ADMIN_HEALTHY_EATING_TABLE_COLUMNS.price}>
-          <InputNumber addonAfter={InterfaceLabels.ADMIN_HEALTHY_RUB} />
-        </Item>
-        <Item name="image">
+        <Space>
+          <Item
+            name="price"
+            label={InterfaceLabels.ADMIN_HEALTHY_EATING_TABLE_COLUMNS.price}
+            rules={[{ required: !id }]}
+          >
+            <InputNumber addonAfter={InterfaceLabels.ADMIN_HEALTHY_RUB} />
+          </Item>
+          <Item
+            name="eatingType"
+            label={InterfaceLabels.ADMIN_HEALTHY_EATING_TABLE_COLUMNS.eatingType}
+            rules={[{ required: !id }]}
+          >
+            <Select options={eatingTypeOptions} />
+          </Item>
+        </Space>
+        <Item name="image" rules={[{ required: !id }]}>
           <Upload {...props}>
             <Button icon={<UploadOutlined />}>{ActionMessages.UPLOAD_BUTTON}</Button>
           </Upload>
