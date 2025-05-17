@@ -1,0 +1,17 @@
+.floatButton {
+  width: 75px;
+  height: 75px;
+  &Icon {
+    font-size: 30px;
+  }
+}
+
+:global(.ant-float-btn-content) {
+  padding: 0 !important;
+  width: 40px !important;
+}
+
+:global(.ant-float-btn-icon) {
+  width: 40px !important;
+  margin: 0 !important;
+}

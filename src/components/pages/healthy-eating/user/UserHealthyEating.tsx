@@ -2,6 +2,9 @@ import React, { useEffect } from 'react';
 
 import { Card, Carousel, Empty, Flex, Typography } from 'antd';
 
+import { BasketDrawer } from '@/components/pages/basket-drawer/BasketDrawer';
+import { BasketButton } from '@/components/utils/basket-button/BasketButton';
+
 import { ActionMessages, InterfaceLabels } from '@/constants';
 
 import MealCardExtra from './meal-card/meal-card-extra/MealCardExtra';
@@ -36,6 +39,8 @@ export const UserHealthyEating = () => {
           <Empty description={<Text>{ActionMessages.SORRY}</Text>} />
         )}
       </Card>
+      <BasketButton />
+      <BasketDrawer />
     </Flex>
   );
 };

@@ -7,6 +7,7 @@ import { InterfaceLabels } from '@/constants';
 import style from './MealCard.module.scss';
 import { MealInfoDto } from '@/dto';
 import { EatingType } from '@/enums/EatingType';
+import { useUserHealthyEatingStore } from '@/stores/user-healthy-eating/useUserHealthyEatingStore';
 
 const { Meta } = Card;
 interface MealCardProps {
@@ -17,6 +18,7 @@ interface MealCardProps {
 const { Text, Paragraph } = Typography;
 
 const MealCard: FC<MealCardProps> = ({ meal, type }) => {
+  const { addItemToBasket } = useUserHealthyEatingStore();
   return (
     <Card hoverable className={style.card} cover={<Avatar size={350} alt={meal.title} src={meal.image} />}>
       <Meta title={meal.title} description={type} />
@@ -41,7 +43,10 @@ const MealCard: FC<MealCardProps> = ({ meal, type }) => {
         </Flex>
 
         <Flex justify="end" align="center" gap="small">
-          <Button type="primary">{`${InterfaceLabels.HEALTHY_EATING_PRICE}: ${meal.price} ₽`}</Button>
+          <Button
+            type="primary"
+            onClick={() => addItemToBasket(meal.id)}
+          >{`${InterfaceLabels.HEALTHY_EATING_PRICE}: ${meal.price} ₽`}</Button>
         </Flex>
       </Flex>
     </Card>

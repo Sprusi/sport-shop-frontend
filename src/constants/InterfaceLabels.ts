@@ -36,3 +36,7 @@ export const ADMIN_HEALTHY_EATING_TABLE_COLUMNS = {
   image: 'Изображение',
   eatingType: 'Время приема',
 };
+
+//Basket
+
+export const BASKET = 'Корзина';

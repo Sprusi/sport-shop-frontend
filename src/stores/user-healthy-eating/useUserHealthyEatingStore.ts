@@ -1,5 +1,7 @@
 import { create } from 'zustand';
 
+import { getUserId } from '@/utils/token';
+
 import { MealPlanResponseDto } from '@/dto';
 import { HealthyEatingServices } from '@/services/HealthyEatingServices';
 import { MessageService } from '@/services/MessageService';
@@ -9,6 +11,7 @@ type Store = {
   loading: boolean;
   getData: () => void;
   updateNeeded: boolean;
+  addItemToBasket: (id: number) => void;
 };
 
 export const useUserHealthyEatingStore = create<Store>()((set) => ({
@@ -17,9 +20,14 @@ export const useUserHealthyEatingStore = create<Store>()((set) => ({
   updateNeeded: true,
   getData: () => {
     set(() => ({ loading: true }));
-    HealthyEatingServices.getHealthyEatingForUser(1)
+    HealthyEatingServices.getHealthyEatingForUser(getUserId())
       .then(({ data }) => set(() => ({ data, updateNeeded: false })))
       .catch(({ message }) => MessageService.warn(message))
       .finally(() => set(() => ({ loading: false })));
+  },
+  addItemToBasket: (id: number) => {
+    HealthyEatingServices.getHealthyEatingToBasket(id)
+      .then(() => MessageService.success())
+      .catch(({ message }) => MessageService.warn(message));
   },
 }));

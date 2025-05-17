@@ -27,6 +27,10 @@ const getHealthyEatingForUser = (id: number): Promise<AxiosResponse<MealPlanResp
   return instance.get(`/healthyEating/user/${id}`);
 };
 
+const getHealthyEatingToBasket = (itemId: number): Promise<AxiosResponse> => {
+  return instance.post(`/healthyEating/basket`, { itemId });
+};
+
 export const HealthyEatingServices = {
   getHealthyEating,
   getHealthyEatingForUser,
@@ -34,4 +38,5 @@ export const HealthyEatingServices = {
   getHealthyEatingById,
   createHealthyEating,
   patchHealthyEatingById,
+  getHealthyEatingToBasket,
 };

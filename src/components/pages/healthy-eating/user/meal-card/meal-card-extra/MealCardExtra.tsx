@@ -16,23 +16,23 @@ const MealCardExtra: FC<MealCardExtraProps> = ({ total }) => {
   const items: DescriptionsProps['items'] = [
     {
       key: '1',
-      label: InterfaceLabels.HEALTHY_EATING_CALORIES,
+      label: InterfaceLabels.ADMIN_HEALTHY_KCAL_SHORT,
       children: calories,
     },
     {
-      key: '1',
+      key: '2',
       label: InterfaceLabels.HEALTHY_EATING_SQUIRRELS,
-      children: squirrels,
+      children: `${squirrels} ${InterfaceLabels.ADMIN_HEALTHY_GRAM_SHORT}`,
     },
     {
-      key: '1',
+      key: '3',
       label: InterfaceLabels.HEALTHY_EATING_FATS,
-      children: fats,
+      children: `${fats} ${InterfaceLabels.ADMIN_HEALTHY_GRAM_SHORT}`,
     },
     {
-      key: '1',
+      key: '4',
       label: InterfaceLabels.HEALTHY_EATING_CARBOHYDRATES,
-      children: carbohydrates,
+      children: `${carbohydrates} ${InterfaceLabels.ADMIN_HEALTHY_GRAM_SHORT}`,
     },
   ];
 
