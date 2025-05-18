@@ -4,6 +4,7 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 import { AnimationPage } from '@/components/pages/animation/AnimationPage';
 import { AdminHealthyEating } from '@/components/pages/healthy-eating/admin/AdminHealthyEating';
 import { UserHealthyEating } from '@/components/pages/healthy-eating/user/UserHealthyEating';
+import { OrderHystory } from '@/components/pages/order-history/OrderHystory';
 
 import '../index.css';
 
@@ -19,7 +20,7 @@ const Navigation = () => {
           <Route element={<AccessRequired />}>
             <Route path="healthy-eating" element={<UserHealthyEating />} />
             <Route path="admin-healthy-eating" element={<AdminHealthyEating />} />
-            <Route path="order-history" element={<AdminHealthyEating />} />
+            <Route path="order-history" element={<OrderHystory />} />
           </Route>
         </Route>
       </Route>

@@ -3,8 +3,10 @@
 
   &Content {
     padding: 24px 50px;
+    max-height: calc(100vh - 135px);
     &Card {
       height: 100%;
+      overflow: auto;
     }
   }
 }

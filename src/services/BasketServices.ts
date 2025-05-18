@@ -2,6 +2,7 @@ import { AxiosResponse } from 'axios';
 
 import instance from './axios';
 import { BasketDto } from '@/dto/basket/BasketDto';
+import { OrderHistory } from '@/dto/basket/OrderHistory';
 
 const getBasketItems = (): Promise<AxiosResponse<BasketDto[]>> => {
   return instance.get(`/basket`);
@@ -23,10 +24,15 @@ const createOrder = (id: number): Promise<AxiosResponse> => {
   return instance.post(`/basket/order/${id}`);
 };
 
+const getOrderHistory = (): Promise<AxiosResponse<OrderHistory[]>> => {
+  return instance.get(`/basket/orderHistory`);
+};
+
 export const BasketServices = {
   getBasketItems,
   removeBasketItems,
   changeQuantity,
   getAllQuantity,
   createOrder,
+  getOrderHistory,
 };

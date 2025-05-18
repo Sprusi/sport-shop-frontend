@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 
 import { BasketDto } from '@/dto/basket/BasketDto';
+import { OrderHistory } from '@/dto/basket/OrderHistory';
 import { BasketServices } from '@/services/BasketServices';
 import { MessageService } from '@/services/MessageService';
 
@@ -14,11 +15,13 @@ type Store = {
   updateNeeded: boolean;
   setUpdateNeeded: (b: boolean) => void;
   data: BasketDto[];
+  historyData: OrderHistory[];
   getData: () => void;
   removeItem: (id: number) => void;
   changeQuantity: (id: number, type: 'inc' | 'dec') => void;
   getAllQuantity: () => void;
   createOrder: (id: number) => void;
+  getHistory: () => void;
 };
 
 export const useBasketDrawerStore = create<Store>()((set) => ({
@@ -26,6 +29,7 @@ export const useBasketDrawerStore = create<Store>()((set) => ({
   loading: false,
   updateNeeded: true,
   data: [],
+  historyData: [],
   updateQuantity: true,
   quantity: 0,
   setOpen: (key: boolean) => set(() => ({ open: key })),
@@ -70,6 +74,14 @@ export const useBasketDrawerStore = create<Store>()((set) => ({
         MessageService.success();
         set(() => ({ updateNeeded: true, updateQuantity: true }));
       })
+      .catch(({ message }) => MessageService.warn(message))
+      .finally(() => set(() => ({ loading: false })));
+  },
+
+  getHistory: () => {
+    set(() => ({ loading: true }));
+    BasketServices.getOrderHistory()
+      .then(({ data }) => set(() => ({ historyData: data })))
       .catch(({ message }) => MessageService.warn(message))
       .finally(() => set(() => ({ loading: false })));
   },

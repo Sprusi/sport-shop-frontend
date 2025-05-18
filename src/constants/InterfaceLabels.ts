@@ -1,6 +1,7 @@
 /* eslint-disable i18n/no-russian-character */
 
 export const SUMM = 'Сумма';
+export const QUANTITY = 'Количество';
 
 // Main page
 
@@ -46,3 +47,4 @@ export const BASKET_ORDER_BUTTON = 'Оформить заказ';
 
 //Order history
 export const ORDER_HISTORY = 'История заказов';
+export const ORDER_HISTORY_NUMBER = 'Номер заказа';
