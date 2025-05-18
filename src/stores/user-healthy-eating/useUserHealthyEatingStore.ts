@@ -9,8 +9,10 @@ import { MessageService } from '@/services/MessageService';
 type Store = {
   data: MealPlanResponseDto[];
   loading: boolean;
+  isItemAdded: boolean;
   getData: () => void;
   updateNeeded: boolean;
+  setUpdateNeeded: (b: boolean) => void;
   addItemToBasket: (id: number) => void;
 };
 
@@ -18,6 +20,8 @@ export const useUserHealthyEatingStore = create<Store>()((set) => ({
   data: [],
   loading: false,
   updateNeeded: true,
+  setUpdateNeeded: (b: boolean) => set(() => ({ updateNeeded: b })),
+  isItemAdded: false,
   getData: () => {
     set(() => ({ loading: true }));
     HealthyEatingServices.getHealthyEatingForUser(getUserId())
@@ -25,9 +29,14 @@ export const useUserHealthyEatingStore = create<Store>()((set) => ({
       .catch(({ message }) => MessageService.warn(message))
       .finally(() => set(() => ({ loading: false })));
   },
+
   addItemToBasket: (id: number) => {
     HealthyEatingServices.getHealthyEatingToBasket(id)
-      .then(() => MessageService.success())
-      .catch(({ message }) => MessageService.warn(message));
+      .then(() => {
+        set(() => ({ isItemAdded: true }));
+        MessageService.success();
+      })
+      .catch(({ message }) => MessageService.warn(message))
+      .finally(() => set(() => ({ isItemAdded: false })));
   },
 }));

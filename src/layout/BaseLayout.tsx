@@ -49,6 +49,11 @@ export const BaseLayout: FC = () => {
       key: 'healthy-eating',
       label: InterfaceLabels.HEALTHY_EATING_FOR_YOU,
     });
+  roles.includes(RolesEnum.USER) &&
+    menuItems.push({
+      key: 'order-history',
+      label: InterfaceLabels.ORDER_HISTORY,
+    });
 
   return (
     <ConfigProvider locale={ru_RU} theme={customTheme}>

@@ -7,12 +7,12 @@ import style from './UserHealthyEating.module.scss';
 import { useBasketDrawerStore } from '@/stores/basket/useBasketDrawerStore';
 
 export const BasketButton = () => {
-  const { setOpen } = useBasketDrawerStore();
+  const { setOpen, quantity } = useBasketDrawerStore();
   return (
     <FloatButton
       onClick={() => setOpen(true)}
       className={style.floatButton}
-      badge={{ count: 12 }}
+      badge={{ count: quantity }}
       icon={<ShoppingCartOutlined className={style.floatButtonIcon} />}
     />
   );

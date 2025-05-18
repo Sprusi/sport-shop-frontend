@@ -1,5 +1,7 @@
 /* eslint-disable i18n/no-russian-character */
 
+export const SUMM = 'Сумма';
+
 // Main page
 
 export const MAIN_PAGE_TITLE =
@@ -40,3 +42,7 @@ export const ADMIN_HEALTHY_EATING_TABLE_COLUMNS = {
 //Basket
 
 export const BASKET = 'Корзина';
+export const BASKET_ORDER_BUTTON = 'Оформить заказ';
+
+//Order history
+export const ORDER_HISTORY = 'История заказов';

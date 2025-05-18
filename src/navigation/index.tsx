@@ -19,6 +19,7 @@ const Navigation = () => {
           <Route element={<AccessRequired />}>
             <Route path="healthy-eating" element={<UserHealthyEating />} />
             <Route path="admin-healthy-eating" element={<AdminHealthyEating />} />
+            <Route path="order-history" element={<AdminHealthyEating />} />
           </Route>
         </Route>
       </Route>

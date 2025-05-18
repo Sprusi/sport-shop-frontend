@@ -8,4 +8,5 @@ export interface MealInfoDto {
   image?: string;
   price: number;
   nutrients: MealNutrientsDto;
+  inBasketQuantity: number;
 }

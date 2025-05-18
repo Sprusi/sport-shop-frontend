@@ -1,3 +1,11 @@
-.delete {
-  color: #dc4446 !important;
+.wrapper {
+  height: 100%;
+}
+
+.footer {
+  width: 100%;
+}
+
+.body {
+  backdrop-filter: blur(10px) !important;
 }

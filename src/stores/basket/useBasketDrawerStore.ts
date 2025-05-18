@@ -7,12 +7,18 @@ import { MessageService } from '@/services/MessageService';
 type Store = {
   open: boolean;
   setOpen: (key: boolean) => void;
+  quantity: number;
+  updateQuantity: boolean;
+  setUpdateQuantity: (b: boolean) => void;
   loading: boolean;
   updateNeeded: boolean;
   setUpdateNeeded: (b: boolean) => void;
   data: BasketDto[];
   getData: () => void;
   removeItem: (id: number) => void;
+  changeQuantity: (id: number, type: 'inc' | 'dec') => void;
+  getAllQuantity: () => void;
+  createOrder: (id: number) => void;
 };
 
 export const useBasketDrawerStore = create<Store>()((set) => ({
@@ -20,10 +26,11 @@ export const useBasketDrawerStore = create<Store>()((set) => ({
   loading: false,
   updateNeeded: true,
   data: [],
-
+  updateQuantity: true,
+  quantity: 0,
   setOpen: (key: boolean) => set(() => ({ open: key })),
   setUpdateNeeded: (b: boolean) => set(() => ({ updateNeeded: b })),
-
+  setUpdateQuantity: (b: boolean) => set(() => ({ updateQuantity: b })),
   getData: () => {
     set(() => ({ loading: true, updateNeeded: false }));
     BasketServices.getBasketItems()
@@ -37,7 +44,31 @@ export const useBasketDrawerStore = create<Store>()((set) => ({
     BasketServices.removeBasketItems(id)
       .then(() => {
         MessageService.success();
-        set(() => ({ updateNeeded: true }));
+        set(() => ({ updateNeeded: true, updateQuantity: true }));
+      })
+      .catch(({ message }) => MessageService.warn(message))
+      .finally(() => set(() => ({ loading: false })));
+  },
+
+  changeQuantity: (id: number, type: 'inc' | 'dec') => {
+    BasketServices.changeQuantity(id, type)
+      .then(() => set(() => ({ updateNeeded: true, updateQuantity: true })))
+      .catch(({ message }) => MessageService.warn(message));
+  },
+
+  getAllQuantity: () => {
+    set(() => ({ updateQuantity: false }));
+    BasketServices.getAllQuantity()
+      .then(({ data }) => set(() => ({ quantity: data })))
+      .catch(({ message }) => MessageService.warn(message));
+  },
+
+  createOrder: (userId: number) => {
+    set(() => ({ loading: true }));
+    BasketServices.createOrder(userId)
+      .then(() => {
+        MessageService.success();
+        set(() => ({ updateNeeded: true, updateQuantity: true }));
       })
       .catch(({ message }) => MessageService.warn(message))
       .finally(() => set(() => ({ loading: false })));
