@@ -18,6 +18,7 @@
     "@ant-design/icons": "5.x",
     "@babel/core": "^7.26.9",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.15",
+    "@react-spring/web": "^10.0.0",
     "@svgr/webpack": "^8.1.0",
     "@trivago/prettier-plugin-sort-imports": "^4.0.0",
     "@types/lodash": "^4.17.16",

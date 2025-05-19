@@ -54,6 +54,11 @@ export const BaseLayout: FC = () => {
       key: 'order-history',
       label: InterfaceLabels.ORDER_HISTORY,
     });
+  roles.includes(RolesEnum.USER) &&
+    menuItems.push({
+      key: 'user-catalog',
+      label: InterfaceLabels.MAIN_PAGE_CATALOG,
+    });
 
   return (
     <ConfigProvider locale={ru_RU} theme={customTheme}>

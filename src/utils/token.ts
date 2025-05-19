@@ -1,7 +1,13 @@
+export const getToken = () => {
+  const token = JSON.parse(localStorage.getItem(`${window.location.origin}_tokenUL`) || '{}');
+
+  return token;
+};
+
 export const getRoles = () => {
   const {
     payload: { roles },
-  } = JSON.parse(localStorage.getItem(`${window.location.origin}_tokenUL`) || '');
+  } = JSON.parse(localStorage.getItem(`${window.location.origin}_tokenUL`) || '{}');
 
   return roles;
 };
@@ -9,7 +15,7 @@ export const getRoles = () => {
 export const getUserId = () => {
   const {
     payload: { id },
-  } = JSON.parse(localStorage.getItem(`${window.location.origin}_tokenUL`) || '');
+  } = JSON.parse(localStorage.getItem(`${window.location.origin}_tokenUL`) || '{}');
 
   return id;
 };

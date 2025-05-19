@@ -5,8 +5,9 @@ export const QUANTITY = 'Количество';
 
 // Main page
 
-export const MAIN_PAGE_TITLE =
-  'Здоровое питание на каждый день для похудения, поддержания или набора веса с доставкой на дом';
+export const MAIN_PAGE_TITLE_FIRST = 'Здоровое питание на каждый день ';
+export const MAIN_PAGE_TITLE_SECOND = 'для похудения, поддержания ';
+export const MAIN_PAGE_TITLE_THERD = 'или набора веса с доставкой на дом';
 export const MAIN_PAGE_CATALOG = 'Каталог';
 
 //UserHealthyEating

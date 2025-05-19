@@ -30,14 +30,16 @@
   color: white;
   height: 100%;
   &Title {
-    text-align: center;
+    text-align: start;
     max-width: 700px;
     color: white !important;
     margin-bottom: 150px !important;
+    margin: 0;
   }
 
   &Button {
-    width: 400px;
+    width: 250px;
     height: 50px;
+    margin-top: 50px;
   }
 }

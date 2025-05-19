@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react';
 
-import { Card, List, Typography } from 'antd';
+import { Card, Divider, List, Typography } from 'antd';
 
 import { InterfaceLabels } from '@/constants';
 
+import { Trail } from '../animation/Trail';
 import { BasketDrawerItem } from '../basket-drawer/basket-drawer-item/BasketDrawerItem';
 
 import style from './OrderHystory.module.scss';
@@ -33,9 +34,14 @@ export const OrderHystory = () => {
             className={style.card}
             extra={`${InterfaceLabels.SUMM}: ${summ}`}
           >
-            {items.map((item, index) => (
-              <BasketDrawerItem key={index} item={item} />
-            ))}
+            <Trail height={200}>
+              {items.map((item, index) => (
+                <>
+                  {index !== 0 ? <Divider /> : <></>}
+                  <BasketDrawerItem key={index} item={item} />
+                </>
+              ))}
+            </Trail>
           </Card>
         );
       }}
