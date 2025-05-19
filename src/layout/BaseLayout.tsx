@@ -54,6 +54,11 @@ export const BaseLayout: FC = () => {
       key: 'order-history',
       label: InterfaceLabels.ORDER_HISTORY,
     });
+  roles.includes(RolesEnum.MANAGER) &&
+    menuItems.push({
+      key: 'admin-orders',
+      label: InterfaceLabels.MAIN_PAGE_ORDERS,
+    });
   roles.includes(RolesEnum.USER) &&
     menuItems.push({
       key: 'user-catalog',

@@ -2,13 +2,29 @@
 
 export const SUMM = 'Сумма';
 export const QUANTITY = 'Количество';
+export const YES = 'Да';
+export const NO = 'Нет';
 
+/**
+ *  AXIOS
+ */
+export const NO_CONNECTION_TO_SERVER = 'Нет связи с сервером';
+export const ACCESS_DENIED = 'Доступ запрещен';
+export const LOGIN_ERROR = 'Ошибка входа в систему';
+export const SERVER_REQUEST_ERROR = 'Ошибка в запросе к серверу';
+export const REQUEST_ERROR = 'Ошибка в запросе';
+export const PAGE_NOT_FOUND = 'Страница или документ не найдена';
+export const INACTIVE_SESSION = 'Сессия истекла или неактивна';
+export const INTERNAL_SERVER_ERROR = 'Ошибка на стороне сервера';
+export const ERROR = (key: string) => 'Ошибка ' + key;
+export const SOMETHING_WENT_WRONG = 'Что-то пошло не так ...';
 // Main page
 
 export const MAIN_PAGE_TITLE_FIRST = 'Здоровое питание на каждый день ';
 export const MAIN_PAGE_TITLE_SECOND = 'для похудения, поддержания ';
 export const MAIN_PAGE_TITLE_THERD = 'или набора веса с доставкой на дом';
 export const MAIN_PAGE_CATALOG = 'Каталог';
+export const MAIN_PAGE_ORDERS = 'Заказы';
 
 //UserHealthyEating
 
@@ -49,3 +65,11 @@ export const BASKET_ORDER_BUTTON = 'Оформить заказ';
 //Order history
 export const ORDER_HISTORY = 'История заказов';
 export const ORDER_HISTORY_NUMBER = 'Номер заказа';
+export const ORDER_HISTORY_FILTERS = {
+  userId: 'ID пользователя',
+  basketId: 'Номер заказа',
+  price: 'Сумма заказа',
+  isActive: 'Активен?',
+  updatedDate: 'Дата обновления',
+};
+export const ORDER_HISTORY_ADD_TO_WORK = 'Принять в работу';

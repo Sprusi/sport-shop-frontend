@@ -22,12 +22,15 @@ const { Item } = List;
 const { Link, Text } = Typography;
 export const BasketDrawerItem: FC<BasketDrawerItemProps> = ({ item }) => {
   const { pathname } = useLocation();
-  const isOrderHistory = pathname.split('/').includes('order-history');
+  const splitedPathName = pathname.split('/');
+  const isOrderHistory = splitedPathName.includes('order-history');
+  const isOrderAdmin = splitedPathName.includes('admin-orders');
+  const isNotDisplayActions = isOrderHistory || isOrderAdmin;
   const { removeItem } = useBasketDrawerStore();
 
   const actions = useMemo(
     () =>
-      isOrderHistory
+      isNotDisplayActions
         ? [
             <Text key={1}>{`${InterfaceLabels.QUANTITY}: ${item.quantity}`}</Text>,
             <Summ key={3} quantity={item.quantity} price={item.price} />,
@@ -37,7 +40,7 @@ export const BasketDrawerItem: FC<BasketDrawerItemProps> = ({ item }) => {
             <DeleteFilled key={2} className={style.delete} onClick={() => removeItem(item.id)} />,
             <Summ key={3} quantity={item.quantity} price={item.price} />,
           ],
-    [isOrderHistory, item]
+    [isNotDisplayActions, item]
   );
 
   return (

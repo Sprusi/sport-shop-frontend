@@ -4,3 +4,6 @@ export * from './Meal/MealPlanResponseDto';
 export * from './Meal/MealTotalsDto';
 export * from './Meal/HealthyEatingTable';
 export * from './Meal/HealthyEating';
+export * from './Token';
+export * from './TokenPayload';
+export * from './TokenResponse';

@@ -2,6 +2,7 @@ import { create } from 'zustand';
 
 import { BasketDto } from '@/dto/basket/BasketDto';
 import { OrderHistory } from '@/dto/basket/OrderHistory';
+import { QueryForAllData } from '@/dto/basket/QueryForAllData';
 import { BasketServices } from '@/services/BasketServices';
 import { MessageService } from '@/services/MessageService';
 
@@ -21,7 +22,9 @@ type Store = {
   changeQuantity: (id: number, type: 'inc' | 'dec') => void;
   getAllQuantity: () => void;
   createOrder: (id: number) => void;
-  getHistory: () => void;
+  updateHistoryNeeded: boolean;
+  setUpdateHistoryNeeded: (b: boolean) => void;
+  getHistory: (params: QueryForAllData, isOrderHistory: boolean) => void;
 };
 
 export const useBasketDrawerStore = create<Store>()((set) => ({
@@ -31,10 +34,12 @@ export const useBasketDrawerStore = create<Store>()((set) => ({
   data: [],
   historyData: [],
   updateQuantity: true,
+  updateHistoryNeeded: true,
   quantity: 0,
   setOpen: (key: boolean) => set(() => ({ open: key })),
   setUpdateNeeded: (b: boolean) => set(() => ({ updateNeeded: b })),
   setUpdateQuantity: (b: boolean) => set(() => ({ updateQuantity: b })),
+  setUpdateHistoryNeeded: (b: boolean) => set(() => ({ updateHistoryNeeded: b })),
   getData: () => {
     set(() => ({ loading: true, updateNeeded: false }));
     BasketServices.getBasketItems()
@@ -78,10 +83,11 @@ export const useBasketDrawerStore = create<Store>()((set) => ({
       .finally(() => set(() => ({ loading: false })));
   },
 
-  getHistory: () => {
+  getHistory: (params: QueryForAllData, isOrderHistory: boolean) => {
     set(() => ({ loading: true }));
-    BasketServices.getOrderHistory()
-      .then(({ data }) => set(() => ({ historyData: data })))
+    const request = isOrderHistory ? BasketServices.getOrderHistory : BasketServices.getAllHistory;
+    request(params)
+      .then(({ data }) => set(() => ({ historyData: data, updateHistoryNeeded: false })))
       .catch(({ message }) => MessageService.warn(message))
       .finally(() => set(() => ({ loading: false })));
   },

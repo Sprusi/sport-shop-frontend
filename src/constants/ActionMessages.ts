@@ -23,3 +23,4 @@ export const CREATE = 'Создать запись';
 export const UPLOAD_BUTTON = 'Нажмите для загрузки изображения';
 export const EDIT = 'Редактировать';
 export const CREATE_USER = 'Создать пользователя';
+export const FILTER = 'Применить фильтры';
