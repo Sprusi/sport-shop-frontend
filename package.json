@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "yarn lint --fix && webpack serve --env mode=development --env hot=false",
-    "build": "yarn run clean && yarn lint && webpack --env mode=production",
+    "build": "yarn run clean && webpack --env mode=production",
     "build:dev": "yarn run clean && yarn lint && webpack --env mode=development",
     "lint": "eslint src",
     "clean": "rm -rf build",
