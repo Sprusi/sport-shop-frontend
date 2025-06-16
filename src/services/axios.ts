@@ -7,7 +7,7 @@ import { AuthService } from './AuthService';
 import { MessageService } from './MessageService';
 
 export function getBaseUrl(): string {
-  return 'http://87.228.80.5';
+  return 'http://87.228.80.5/api';
 }
 
 const instance = axios.create({ baseURL: getBaseUrl() });
